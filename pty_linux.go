@@ -13,7 +13,7 @@ func open() (pty, tty *os.File, err error) {
 		return nil, nil, err
 	}
 
-	_, err = ptsname(p)
+	sname, err = ptsname(p)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -23,11 +23,11 @@ func open() (pty, tty *os.File, err error) {
 		return nil, nil, err
 	}
 
-	//t, err := os.OpenFile(sname, os.O_RDWR|syscall.O_NOCTTY, 0)
-	//if err != nil {
-	//	return nil, nil, err
-	//}
-	return p, nil, nil
+	t, err := os.OpenFile(sname, os.O_RDWR|syscall.O_NOCTTY, 0)
+	if err != nil {
+		return nil, nil, err
+	}
+	return p, t, nil
 }
 
 func ptsname(f *os.File) (string, error) {
