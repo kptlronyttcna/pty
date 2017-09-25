@@ -13,7 +13,7 @@ func open() (pty, tty *os.File, err error) {
 		return nil, nil, err
 	}
 
-	err = ptsname(p)
+	_, err = ptsname(p)
 	if err != nil {
 		return nil, nil, err
 	}
