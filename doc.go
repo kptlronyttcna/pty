@@ -14,3 +14,7 @@ var ErrUnsupported = errors.New("unsupported")
 func Open() (pty, tty *os.File, err error) {
 	return open()
 }
+
+func PtsName(f *os.File) (string, error) {
+	return ptsname(f)
+}
